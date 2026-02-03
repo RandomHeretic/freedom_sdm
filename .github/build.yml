@@ -1,8 +1,8 @@
 name: CI GitHubActions
 
 # QUANDO parte l'azione?
-# 1. Quando fai push sul ramo main
-# 2. Quando apri una Pull Request verso il main
+# quando fai push 
+# quando apri una Pull Request 
 on:
   push:
     branches: [ "main" ]
@@ -24,7 +24,7 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
-    # gradle
+    # utilizza le build presenti
     - uses: gradle/actions/setup-gradle@v4
 
     # rende eseguibile lo script

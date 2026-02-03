@@ -1,14 +1,22 @@
 package org.freedom;
 
 public class State {
-    private Board CurrentBoard;
+    private final Board CurrentBoard;
     private Move LastMove;
 
-    public State(Board Old_Board, Move Last_Move, int Player){
+    public State(Board Old_Board, Move Last_Move){
         LastMove=Last_Move;
         CurrentBoard=Old_Board;
-        CurrentBoard.applyMove(LastMove,Player);
     }
+    public State(Board NewGameboard){
+        CurrentBoard=NewGameboard;
+    }
+
+    public void applyMove(Move NewMove,int player){
+        CurrentBoard.applyMove(NewMove,player);
+        LastMove=NewMove;
+    }
+
 
     public Board giveBoard(){
         return CurrentBoard;
@@ -23,5 +31,12 @@ public class State {
 
     public Move giveLastMove(){
         return LastMove;
+    }
+
+    public void printState(){
+        if(LastMove!=null) {
+            LastMove.printAsLastMove();
+        }
+        CurrentBoard.printBoard();
     }
 }

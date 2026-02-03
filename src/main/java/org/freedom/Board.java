@@ -1,18 +1,16 @@
 package org.freedom;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class Board {
-    private int[][] board;
+    private final int[][] board;
 
     public Board(int n){
-        if (n==8){
-            board = new int[8][8];
-        } else if (n==10) {
-            board = new int[10][10];
-        }else {
-            board = new int[n][n];
+        board = new int[n][n];
+        for(int i=0;i<n;i++){
+            for (int j=0;j<n;j++){
+                board[i][j]=0;
+            }
         }
 
     }
@@ -32,5 +30,16 @@ public class Board {
     public void applyMove(Move LastMove,int player){
         int[] m =LastMove.returnMove();
         board[m[0]][m[1]]=player;
+    }
+
+    public void printBoard(){
+        for(int i=0;i< board.length;i++){
+            String row = "";
+            for(int j=0;j< board.length;j++){
+                row += board[i][j] + " ";
+            }
+            System.out.println(row);
+        }
+
     }
 }

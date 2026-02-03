@@ -1,6 +1,6 @@
 
 import org.freedom.*;
-import org.junit.Assert;
+
 import org.junit.Test;
 
 
@@ -56,13 +56,40 @@ public class FreedomBasicTests {
     }
 
     @Test
+    public void verifyNewBoardIsEmpty(){
+        int n=7;
+        Board b = new Board(n);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                assert b.givePosition(i,j)==0;
+            }
+        }
+    }
+
+    @Test
     public void verifyStateHasBoardAndMove(){
         Board b = new Board(8);
         Move m = new Move(1,3);
-        int p = 1;
-        State s = new State(b,m,p);
+        State s = new State(b,m);
         assert b == s.giveBoard();
         assert m == s.giveLastMove();
-        assert p == s.giveBoardPosition(m);
     }
+
+    @Test
+    public void verifyMatchHasState(){
+        Match M = new Match(8);
+        assert M.giveCurrentState().getClass()== State.class;
+    }
+
+    @Test
+    public void verifyMatchAlternatesPlayers(){
+        Move m1 = new Move(1,2);
+        Move m2 = new Move(1,3);
+        Match Mat = new Match(5);
+        Mat.applyAMove(m1);
+        Mat.applyAMove(m2);
+        assert Mat.giveCurrentState().giveBoardPosition(m1)==1;
+        assert Mat.giveCurrentState().giveBoardPosition(m2)==2;
+    }
+
 }
